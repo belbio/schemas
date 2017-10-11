@@ -33,22 +33,10 @@ anyOf:
         type: string
 
 definitions:
-
-  schema_uri_obj:
-    type: string
-    format: url
-    description: JSON Schema definition URI
-
   schema_uri:
-    id: /definitions/schema
-    description: JSON Schema URI to validate this nanopub against it.
-    type: object
-    additionalProperties: false
-    required:
-      - schema_uri
-    properties:
-      schema_uri:
-        $ref: "#/definitions/schema_uri_obj"
+    type: string
+    format: uri
+    description: JSON Schema definition URI
 
   metadata:
     description: Nanopub collection metadata used to document and validate nanopub collection
@@ -108,7 +96,8 @@ definitions:
           - edges
         properties:
           schema_uri:
-            $ref: "#/definitions/schema_uri_obj"
+            type: string
+            format: uri
           id:
             anyOf:
               - type: string
@@ -127,7 +116,7 @@ definitions:
                 description: Name of Nanopub type, e.g. BEL
               version:
                 type: string
-                description: Version of Nanopub type, e.g. 1.0.0
+                description: Version of Nanopub type, e.g. 2.0.0
           context:
             description: Context of the edge[s] (e.g for BEL nanopubs, the species, tissue, disease)
               state, ...
@@ -141,6 +130,8 @@ definitions:
                   anyOf:
                     - type: string
                     - type: object
+                label:
+                  type: string
           citation:
             description: |
               Reference to the source. The specific type of nanopub may have

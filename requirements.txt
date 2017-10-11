@@ -1,0 +1,2 @@
+PyYAML==3.12
+json2yaml==1.1.1
