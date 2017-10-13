@@ -64,15 +64,11 @@ definitions:
           description:
             type: string
             description: description or definition of term
-          species:
+          species_id:
             type: string
             description: NCBI taxonomy id, e.g. TAX:9606 for human
-          taxonomy_tree:
-            type: string
-            description: |
-              List of all ancesters and self of this taxonomy term, this is used
-              for filtering term completions for gene, RNA, proteins by different
-              levels of the taxonomy tree
+          species_label:
+            description: Human friendly label for taxonomy id
           entity_types:
             type: array
             items:
