@@ -223,6 +223,9 @@ definitions:
               reviewer_email:
                 type: string
                 format: email
+              notes:
+                type: string
+                description: General notes about Nanopub created by author or editors.
               status:
                 type: string
                 description: Status of nanopub - used for workflow management e.g. draft, review, published
