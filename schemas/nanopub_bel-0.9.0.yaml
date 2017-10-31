@@ -1,8 +1,24 @@
 $schema: http://json-schema.org/draft-04/schema#
-# id: http://json.schemastore.org/nanopub-1.0.0.json
 description: |
+  NOTE: This schema is NOT an official Nanopub JSON Schema by the
+  [Nanopub Organization](http://nanopub.org/). It is conceptually derived
+  from their fine work for the needs of [BEL.bio](http://bel.bio).
+
+  The purpose of this schema is to manage assertions (labeled as edges in
+  the schema) and associated metadata such as assertion citation, context and
+  general metadata.  This format is designed for use with [BEL](http://bel.bio).
+  It differs from the nanopub_graphdati schema due to a stricter specification
+  of the nanopub context object.
+
+  Please provide feedback as github issues or pull requests at
+  https://github.com/belbio/schemas.
+
+  The master version of this JSON Schema is managed at:
+  https://github.com/belbio/schemas/blob/master/schemas/nanopub_bel-0.9.0.yaml
+
   A nanopub file is either a single nanopub, an array of nanopubs or uses
-  the JSON Lines (http://jsonlines.org/) format with a nanopub per line.
+  the JSON Lines (http://jsonlines.org/) format with a nanopub (or schema_uri,
+  metadata object) per line.
 
   Note: This JSON schema is designed to work with the Swagger Specification as a
   schema object which does not allow 'type' to be an array so not able to specify
@@ -18,26 +34,33 @@ description: |
   array of nanopub objects at the same time.
 
 anyOf:
+  - $ref: '#/definitions/nanopub'
   - $ref: "#/definitions/schema_uri"
   - $ref: "#/definitions/metadata"
-  - $ref: '#/definitions/nanopub'
   - type: array
     items:
       anyOf:
+        - $ref: '#/definitions/nanopub'
         - $ref: "#/definitions/schema_uri"
         - $ref: '#/definitions/metadata'
-        - $ref: '#/definitions/nanopub'
-  - type: object
-    properties:
-      schema:
-        type: string
 
 definitions:
   schema_uri:
-    type: string
-    format: uri
-    description: JSON Schema definition URI
-
+    type: object
+    additionalProperties: false
+    required:
+      - schema_uri
+    properties:
+      schema_uri:
+        type: object
+        additionalProperties: false
+        required:
+          - uri
+        properties:
+          uri:
+            type: string
+            format: uri
+            description: JSON Schema definition URI
   metadata:
     description: Nanopub collection metadata used to document and validate nanopub collection
     type: object
@@ -99,7 +122,7 @@ definitions:
             type: string
             format: uri
           id:
-            anyOf:
+            oneOf:
               - type: string
               - type: "null"
             description: ID of nanopub
@@ -124,56 +147,80 @@ definitions:
             items:
               type: object
               properties:
-                key:
+                type:
+                  description: type of context, e.g. Disease, Species, etc
                   type: string
-                value:
-                  anyOf:
-                    - type: string
-                    - type: object
+                id:
+                  description: context ID such as TAX:9606 (e.g. human) for Species context type
+                  type: string
                 label:
+                  description: human friendly label
                   type: string
           citation:
             description: |
               Reference to the source. The specific type of nanopub may have
-              specific objects required for citations (e.g. BEL citations).
+              specific objects required for citations.
               The following properties are optional.
             type: object
             additionalProperties: true
-            required:
-              - citation
+            anyOf:
+              - required:
+                - uri
+              - required:
+                - database
+              - required:
+                - reference
+
             properties:
-              citation:
+              uri:
+                type: string
+                format: uri
+                description: URL of this citation, e.g. a website cited should have this field
+
+              database:
+                type: object
+                required:
+                  - name
+                  - id
+                properties:
+                  name:
+                    type: string
+                    description: name of database, e.g. Pubmed, DOI, etc
+                  id:
+                    description: Source ID of citation, e.g. Pubmed ID for Pubmed citations
+                    oneOf:
+                     - type: string
+                     - type: number
+
+              reference:
                 oneOf:
-                  - type: string
-                    format: uri
-                    description: URL of this citation, e.g. a website cited should have this field
-                  - type: object
-                    properties:
-                      source_db:
-                        type: string
-                        description: name of journal, book, website
-                      src_id:
-                        type: string
-                        description: Source ID of citation, e.g. Pubmed ID for Pubmed citations
                   - type: string
                     description: |
                       Citation as single unparsed string, e.g.
                       Edmunds W, Pebody R, et al. 2000. The sero-epidemiology of
                       diptheria in Western Europe. Epidemiol Infect 125(1):113-25.
+                  - type: object
+                    description: reference object
+
               authors:
                 type: array
                 items:
                   type: string
               source_name:
                 type: string
-                description: name of journal, book, website
+                description: name of journal, book, website, database
+              source_type:
+                type: string
+                description: type of citation, journal, book, website, database
               title:
                 type: string
                 description: Title of citation (journal article title, web page title, book chapter title)
               date_published:
                 type: string
-                description: ISO Date format, e.g. 20161231 for December 31, 2016
-
+                description: ISO Date format, e.g. 2016-12-31 for December 31, 2016
+              comments:
+                type: string
+                description: Comments about the citation by Nanopub creator(s)
           edges:
             description: List of edges, minimum of 1 edge required, all edges must match context
             type: array
@@ -218,15 +265,7 @@ definitions:
               author_email:
                 type: string
                 format: email
-              reviewer_name:
-                type: string
-              reviewer_email:
-                type: string
-                format: email
               notes:
                 type: string
                 description: General notes about Nanopub created by author or editors.
-              status:
-                type: string
-                description: Status of nanopub - used for workflow management e.g. draft, review, published
 

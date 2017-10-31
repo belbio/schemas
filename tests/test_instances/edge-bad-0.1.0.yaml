@@ -1,0 +1,7 @@
+edge:
+  nanopub_id: '1'
+  subject:
+    name: r(HGNC:AKT1)
+  relation:
+    name: translatedTo
+

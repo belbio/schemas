@@ -34,45 +34,49 @@ definitions:
       edge:
         type: object
         required:
-          - edge
+          - subject
+          - relation
+          - object
         properties:
           nanopub_id:
             type: string
             description: |
               Source nanopub ID - preferentially an murmur3 128bit hash of
               citation, context and edge sorted alphanumerically as a JSON string
-          edge:
+          subject:
             type: object
-            description: Edge to be stored in EdgeStore
+            required:
+              - name
             properties:
-              subject:
-                type: object
-                properties:
-                  subject:
-                    type: string
-                  label:
-                    type: string
-                  context:
-                    $ref: "#/definitions/context"
-              relation:
-                type: object
-                properties:
-                  relation:
-                    type: string
-                  label:
-                    type: string
-                  source:
-                    type: string
-                    description: Source Nanopub ID
-                  context:
-                    $ref: "#/definitions/context"
-              object:
-                type: object
-                properties:
-                  object:
-                    type: string
-                  label:
-                    type: string
-                  context:
-                    $ref: "#/definitions/context"
+              name:
+                type: string
+              label:
+                type: string
+              context:
+                $ref: "#/definitions/context"
+          relation:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+              label:
+                type: string
+              source:
+                type: string
+                description: Source Nanopub ID
+              context:
+                $ref: "#/definitions/context"
+          object:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+              label:
+                type: string
+              context:
+                $ref: "#/definitions/context"
 
