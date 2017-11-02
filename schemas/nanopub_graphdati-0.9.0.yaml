@@ -2,19 +2,19 @@ $schema: http://json-schema.org/draft-04/schema#
 description: |
   NOTE: This schema is NOT an official Nanopub JSON Schema by the
   [Nanopub Organization](http://nanopub.org/). It is conceptually derived
-  from their fine work for the needs of [BEL.bio](http://bel.bio).
+  from their fine work for the needs of GraphDati.
 
   The purpose of this schema is to manage assertions (labeled as edges in
   the schema) and associated metadata such as assertion citation, context and
   general metadata.  This format is designed for use with [BEL](http://bel.bio).
-  It differs from the nanopub_graphdati schema due to a stricter specification
-  of the nanopub context object.
+  It differs from the nanopub_bel schema due to a stricter specification
+  of the nanopub.context object in nanobpub_bel.
 
   Please provide feedback as github issues or pull requests at
   https://github.com/belbio/schemas.
 
   The master version of this JSON Schema is managed at:
-  https://github.com/belbio/schemas/blob/master/schemas/nanopub_bel-0.9.0.yaml
+  https://github.com/belbio/schemas/blob/master/schemas/nanopub_graphdati-0.9.0.yaml
 
   A nanopub file is either a single nanopub, an array of nanopubs or uses
   the JSON Lines (http://jsonlines.org/) format with a nanopub (or schema_uri,
@@ -127,7 +127,7 @@ definitions:
               - type: "null"
             description: ID of nanopub
           type:
-            description: 'Type of nanopub: BEL version 2.0.0, PEL, Legal, etc'
+            description: 'Type of nanopub: BEL version 2.0.0, PEL, LegEL, etc'
             type: object
             additionalProperties: false
             required:
@@ -136,7 +136,7 @@ definitions:
             properties:
               name:
                 type: string
-                description: Name of Nanopub type, e.g. BEL
+                description: Name of Nanopub type, e.g. BEL, PEL, LegEL, etc
               version:
                 type: string
                 description: Version of Nanopub type, e.g. 2.0.0
@@ -146,16 +146,6 @@ definitions:
             type: array
             items:
               type: object
-              properties:
-                type:
-                  description: type of context, e.g. Disease, Species, etc
-                  type: string
-                id:
-                  description: context ID such as TAX:9606 (e.g. human) for Species context type
-                  type: string
-                label:
-                  description: human friendly label
-                  type: string
           citation:
             description: |
               Reference to the source. The specific type of nanopub may have
