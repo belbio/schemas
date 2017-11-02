@@ -6,7 +6,7 @@ description: |
 
   The purpose of this schema is to manage assertions (labeled as edges in
   the schema) and associated metadata such as assertion citation, context and
-  general metadata.  This format is designed for use with [BEL](http://bel.bio).
+  general metadata.  This format is designed for use with GraphDati.
   It differs from the nanopub_bel schema due to a stricter specification
   of the nanopub.context object in nanobpub_bel.
 
