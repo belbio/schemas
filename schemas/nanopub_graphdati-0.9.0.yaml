@@ -217,19 +217,16 @@ definitions:
             minItems: 1
             items:
               type: object
+              additionalProperties: false
+              required:
+                - subject
               properties:
-                edge:
-                  type: object
-                  additionalProperties: false
-                  required:
-                    - subject
-                  properties:
-                    subject:
-                      type: string
-                    relation:
-                      type: string
-                    object:
-                      type: string
+                subject:
+                  type: string
+                relation:
+                  type: string
+                object:
+                  type: string
 
           evidence:
             description: Any specific summary text that serves as a basis for this edge and context.
