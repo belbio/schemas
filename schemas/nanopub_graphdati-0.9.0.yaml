@@ -224,10 +224,13 @@ definitions:
                 subject:
                   type: string
                 relation:
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: "null"
                 object:
-                  type: string
-
+                  oneOf:
+                    - type: string
+                    - type: "null"
           evidence:
             description: Any specific summary text that serves as a basis for this edge and context.
             type: string

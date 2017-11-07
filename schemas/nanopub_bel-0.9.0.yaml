@@ -89,19 +89,14 @@ definitions:
             type: string
             description: email address to contact for details on this nanopub collection
           namespaces:
-            type: array
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
             description: |
               If using a namespace:value entity in your edge or context objects, this provides a
               way of providing an abbreviated namespace to support an unambiguous
               namespace value.
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                uri:
-                  type: string
-                  format: uri
 
   nanopub:
     description: Smallest unit of relational knowledge with context (see http://nanopub.org/)
@@ -234,9 +229,13 @@ definitions:
                 subject:
                   type: string
                 relation:
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: "null"
                 object:
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: "null"
 
           evidence:
             description: Any specific summary text that serves as a basis for this edge and context.
