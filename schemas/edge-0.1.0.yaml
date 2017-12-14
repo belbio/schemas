@@ -8,6 +8,11 @@ oneOf:
   items:
     $ref: '#/definitions/edge'
 definitions:
+
+  metadata:
+    type: object
+    additionalProperties: true
+
   context:
     type: array
     items:
@@ -54,6 +59,8 @@ definitions:
                 type: string
               context:
                 $ref: "#/definitions/context"
+              metadata:
+                $ref: "#/definitions/metadata"
           relation:
             type: object
             required:
@@ -63,11 +70,10 @@ definitions:
                 type: string
               label:
                 type: string
-              source:
-                type: string
-                description: Source Nanopub ID
               context:
                 $ref: "#/definitions/context"
+              metadata:
+                $ref: "#/definitions/metadata"
           object:
             type: object
             required:
@@ -79,4 +85,5 @@ definitions:
                 type: string
               context:
                 $ref: "#/definitions/context"
-
+              metadata:
+                $ref: "#/definitions/metadata"

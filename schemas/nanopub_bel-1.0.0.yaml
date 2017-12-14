@@ -111,7 +111,7 @@ definitions:
         required:
           - type
           - citation
-          - edges
+          - assertions
         properties:
           schema_uri:
             type: string
@@ -135,9 +135,9 @@ definitions:
               version:
                 type: string
                 description: Version of Nanopub type, e.g. 2.0.0
-          context:
-            description: Context of the edge[s] (e.g for BEL nanopubs, the species, tissue, disease)
-              state, ...
+          annotations:
+            description: Context of the edge[s] (e.g for BEL nanopubs, the species, tissue, disease) or
+              state, or other annotations pertaining to the assertions (bel statements)
             type: array
             items:
               type: object
@@ -217,7 +217,7 @@ definitions:
                 type: string
                 description: Comments about the citation by Nanopub creator(s)
           assertions:
-            description: List of assertions, minimum of 1 edge required, all edges must match context
+            description: List of assertions (e.g. BEL statements), minimum of 1 assertion required, all annotations apply to all assertions
             type: array
             minItems: 1
             items:
@@ -242,8 +242,13 @@ definitions:
             type: string
           metadata:
             description: |
-              Optional metadata elements - Creator information, creation date, additional notes, etc
-              Any additional metadata elements can be added as needed.
+              Optional metadata elements - Creator information, creation date,
+              additional notes, etc.  Any additional metadata elements can be
+              added as needed.
+
+              Metadata elements apply to the nanopub.
+
+              Annotations apply to the assertions.
             type: object
             additionalProperties: true
             properties:

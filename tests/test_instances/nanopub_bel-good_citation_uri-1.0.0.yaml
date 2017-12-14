@@ -4,13 +4,13 @@ nanopub:
     name: BEL
     version: '1.0'
   schema_uri: http://json.schemastore.org/nanopub-1.0.0.json
-  edges:
+  assertions:
     - object: bp(GOBP:"lipid oxidation")
       relation: positiveCorrelation
       subject: path(MESHD:Atherosclerosis)
   evidence: Oxidation and nitration of macromolecules, such as proteins, DNA and lipids,
     are prominentin atherosclerotic arteries.
-  context:
+  annotations:
     - type: Anatomy
       id: MESH:artery
       label: artery

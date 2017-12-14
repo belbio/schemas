@@ -35,6 +35,7 @@ def test_examples():
 
         schema_basename = re.sub('\-.*?\-', '-', basename)
         schema_fn = f'{home_path}/schemas/{schema_basename}'
+        print('Schema FN', schema_fn)
 
         with open(schema_fn, 'r') as f:
             schema = yaml.load(f)
@@ -67,6 +68,7 @@ def test_instances():
 
         schema_basename = re.sub('\-.*?\-', '-', basename)
         schema_fn = f'{home_path}/schemas/{schema_basename}'
+        print('Schema FN', schema_fn)
 
         with open(schema_fn, 'r') as f:
             schema = yaml.load(f)
@@ -104,15 +106,8 @@ def main():
     test_examples()
     quit()
 
-
     import json
     import pprint
-
-    with open('../examples/nanopub_bel-example-0.9.0.yaml', 'r') as f:
-        example = yaml.load(f)
-
-    # with open('../schemas/test.json', 'r') as f:
-    #     schema = json.load(f)
 
     with open('../schemas/test2.yaml', 'r') as f:
         schema = yaml.load(f)
