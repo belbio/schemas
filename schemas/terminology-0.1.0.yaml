@@ -75,12 +75,12 @@ definitions:
               type: string
               enum: ["Abundance", "Protein", "RNA", "Micro_RNA", "Gene", "Complex", "BiologicalProcess", "Pathology", "Activity", "Variant", "ProteinModification", "AminoAcid", "Location",]
               description: Entity types for specific term.  These are the entity types that match terms to slots in BEL Statements.
-          context_types:
+          annotation_types:
             types: array
             items:
               type: string
-              enum: ["Anatomy", "Cell", "CellLine", "CellStructure", "Disease", "Species", 'Tissue']
-              description: Context annotation for BEL Statements
+              enum: ["Anatomy", "Cell", "CellLine", "CellStructure", "Disease", "Organism", 'Tissue']
+              description: Annotation for BEL Assertions
           equivalences:
             type: array
             description: equivalent identifiers in other namespaces, namespace prefix + ':' + id
