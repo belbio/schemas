@@ -141,7 +141,7 @@ definitions:
                 type: string
                 description: Version of Nanopub type, e.g. 2.0.0
           annotations:
-            description: Context of the edge[s] (e.g for BEL nanopubs, the species, tissue, disease) or
+            description: Context of the assertion[s] (e.g for BEL nanopubs, the species, tissue, disease) or
               state, or other annotations pertaining to the assertions (bel statements)
             type: array
             items:
