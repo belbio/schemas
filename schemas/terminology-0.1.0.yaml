@@ -12,10 +12,19 @@ definitions:
     properties:
       metadata:
         type: object
+        required:
+          - name
+          - type
+          - namespace
+          - src_url
+          - version
         properties:
           name:
             type: string
             description: name of terminology
+          type:
+            type: string
+            description: namespace
           namespace:
             type: string
             description: namespace prefix, e.g. SP for SwissProt
@@ -43,7 +52,10 @@ definitions:
         properties:
           namespace:
             type: string
-            description: namespace prefix for term
+            description: namespace prefix for term (e.g. HGNC:AKT1 - namespace=HGNC)
+          namespace_value:
+            type: string
+            description: namespace value for term (e.g. HGNC:AKT1 - namespace_value=AKT1)
           src_id:
             type: string
             description: canonical id from source database - used in the url_template
@@ -75,12 +87,12 @@ definitions:
               type: string
               enum: ["Abundance", "Protein", "RNA", "Micro_RNA", "Gene", "Complex", "BiologicalProcess", "Pathology", "Activity", "Variant", "ProteinModification", "AminoAcid", "Location",]
               description: Entity types for specific term.  These are the entity types that match terms to slots in BEL Statements.
-          context_types:
+          annotations_types:
             types: array
             items:
               type: string
               enum: ["Anatomy", "Cell", "CellLine", "CellStructure", "Disease", "Species", 'Tissue']
-              description: Context annotation for BEL Statements
+              description: Annotations for BEL Statements
           equivalences:
             type: array
             description: equivalent identifiers in other namespaces, namespace prefix + ':' + id

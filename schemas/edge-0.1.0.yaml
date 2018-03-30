@@ -13,15 +13,20 @@ definitions:
     type: object
     additionalProperties: true
 
-  context:
+  components:
+    type: array
+    items:
+      type: string
+
+  annotations:
     type: array
     items:
       type: object
       properties:
         type:
           description: |
-            Types of context to use for filtering edges, e.g.
-            Species for BEL Edges, etc
+            Types of annotations from the BEL Nanopub to use for filtering edges, e.g.
+            Species, Disease, Tissue for BEL Edges, etc
           type: string
         id:
           description: unique identifier, e.g. TAX:9606 for human
@@ -48,6 +53,18 @@ definitions:
             description: |
               Source nanopub ID - preferentially an murmur3 128bit hash of
               citation, context and edge sorted alphanumerically as a JSON string
+          nanopub_dt:
+            type: string
+            description: |
+              Format: YYYY-MM-DDThh:mm:ss.sssZ
+              This is not a required field, but it can be helpful for filtering
+              nanopubs based on *modification* Datetime.
+          edge_dt:
+            type: string
+            description: |
+              Format: YYYY-MM-DDThh:mm:ss.sssZ
+              This is not a required field, but it can be helpful for filtering edges
+              based on insertion Datetime.
           subject:
             type: object
             required:
@@ -56,9 +73,10 @@ definitions:
               name:
                 type: string
               label:
+                description: De-canonicalized version of the canonicalized name, medium BEL format
                 type: string
-              context:
-                $ref: "#/definitions/context"
+              components:
+                $ref: "#/definitions/components"
               metadata:
                 $ref: "#/definitions/metadata"
           relation:
@@ -66,12 +84,23 @@ definitions:
             required:
               - name
             properties:
-              name:
+              relation:
                 type: string
-              label:
+                description: medium BEL format relation name
+              subject_canon:
+                description: Same as subject.name
                 type: string
-              context:
-                $ref: "#/definitions/context"
+              subject:
+                description: De-canonicalized version of the canonicalized subject copied here for easier query results
+                type: string
+              object_canon:
+                description: Same as object.name
+                type: string
+              object:
+                description: De-canonicalized version of the canonicalized subject copied here for easier query results
+                type: string
+              annotations:
+                $ref: "#/definitions/annotations"
               metadata:
                 $ref: "#/definitions/metadata"
           object:
@@ -82,8 +111,9 @@ definitions:
               name:
                 type: string
               label:
+                description: De-canonicalized version of the canonicalized name, medium BEL format
                 type: string
-              context:
-                $ref: "#/definitions/context"
+              components:
+                $ref: "#/definitions/components"
               metadata:
                 $ref: "#/definitions/metadata"

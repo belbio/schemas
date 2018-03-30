@@ -35,10 +35,18 @@ definitions:
     properties:
       metadata:
         type: object
+        required:
+          - source
+          - type
+          - src_url
+          - version
         properties:
           source:
             type: string
             description: Source of orthologs
+          type:
+            type: string
+            description: ortholog
           src_url:
             type: string
             format: url
