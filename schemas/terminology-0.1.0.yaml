@@ -18,6 +18,7 @@ definitions:
           - namespace
           - src_url
           - version
+          - equivalences
         properties:
           name:
             type: string
