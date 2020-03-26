@@ -33,9 +33,11 @@ description: |
   are not compatible.  It doesn't make sense to use the nanopub object and
   array of nanopub objects at the same time.
 
-  CHANGES:
-    1.1.0:
+  ## CHANGES:
+  
+  ### 1.1.0:
       - Introduce citation.id field combining (uri, database, reference ids)
+      - Allow additional properties on Assertion object
 
 anyOf:
   - $ref: '#/definitions/nanopub'
@@ -285,4 +287,3 @@ definitions:
               notes:
                 type: string
                 description: General notes about Nanopub created by author or editors.
-
